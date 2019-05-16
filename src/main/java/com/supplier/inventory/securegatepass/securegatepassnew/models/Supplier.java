@@ -2,7 +2,7 @@ package com.supplier.inventory.securegatepass.securegatepassnew.models;
 
 public class Supplier {
 
-	private String supplirId;
+	private String supplierId;
 	private String firmName;
 	private long phoneNumber;
 	private String address;
@@ -15,7 +15,7 @@ public class Supplier {
 	public Supplier(String supplirId, String firmName, long phoneNumber, String address, String email,
 			String password) {
 		super();
-		this.supplirId = supplirId;
+		this.supplierId = supplirId;
 		this.firmName = firmName;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
@@ -23,10 +23,10 @@ public class Supplier {
 		this.password = password;
 	}
 	public String getSupplirId() {
-		return supplirId;
+		return supplierId;
 	}
 	public void setSupplirId(String supplirId) {
-		this.supplirId = supplirId;
+		this.supplierId = supplirId;
 	}
 	public String getFirmName() {
 		return firmName;
@@ -60,7 +60,7 @@ public class Supplier {
 	}
 	@Override
 	public String toString() {
-		return "Supplier [supplirId=" + supplirId + ", firmName=" + firmName + ", phoneNumber=" + phoneNumber
+		return "Supplier [supplirId=" + supplierId + ", firmName=" + firmName + ", phoneNumber=" + phoneNumber
 				+ ", address=" + address + ", email=" + email + ", password=" + password + "]";
 	}
 
