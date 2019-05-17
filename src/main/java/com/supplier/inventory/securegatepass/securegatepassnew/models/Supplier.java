@@ -1,33 +1,29 @@
 package com.supplier.inventory.securegatepass.securegatepassnew.models;
 
+import org.springframework.data.annotation.Id;
+
 public class Supplier {
 
-	private String supplierId;
 	private String firmName;
 	private long phoneNumber;
 	private String address;
 	private String email;
-	private String password;
 
 	public Supplier() {
 		super();
 	}
-	public Supplier(String supplirId, String firmName, long phoneNumber, String address, String email,
+	public Supplier(String supplierId, String firmName, long phoneNumber, String address, String email,
 			String password) {
 		super();
-		this.supplierId = supplirId;
+		
 		this.firmName = firmName;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.email = email;
-		this.password = password;
+		
 	}
-	public String getSupplirId() {
-		return supplierId;
-	}
-	public void setSupplirId(String supplirId) {
-		this.supplierId = supplirId;
-	}
+
+	
 	public String getFirmName() {
 		return firmName;
 	}
@@ -52,17 +48,13 @@ public class Supplier {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	@Override
 	public String toString() {
-		return "Supplier [supplirId=" + supplierId + ", firmName=" + firmName + ", phoneNumber=" + phoneNumber
-				+ ", address=" + address + ", email=" + email + ", password=" + password + "]";
+		return "Supplier [firmName=" + firmName + ", phoneNumber=" + phoneNumber + ", address=" + address + ", email="
+				+ email + "]";
 	}
+
+
 
 
 
