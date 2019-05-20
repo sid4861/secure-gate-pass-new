@@ -23,6 +23,10 @@ public class GatepassController {
 
 		gatePass.set_id(ObjectId.get());
 		repository.save(gatePass);
+		
+		/*
+		 code to send OTP to customer's phone number
+		 */
 		return gatePass;
 	}
 }
