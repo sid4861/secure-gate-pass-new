@@ -19,28 +19,31 @@ public class Gatepass {
 
 	@Id
 	private ObjectId _id;
-	
+
 	private String supplierName;
 	private String supplierAddress;
 	private String supplierPhonenumber;
-	
+
 	private String inventoryName;
 	private String inventoryAddress;
 	private String inventoryPhonenumber;
-	
+
 	private String customerName;
 	private String customerAddress;
 	private String customerPhonenumber;
-	
+
 	private HashMap<String, String> products;
-	
+	private String status;
+	private long otp;
+
+
 	public Gatepass() {
-		
+
 	}
 
 	public Gatepass(String supplierName, String supplierAddress, String supplierPhonenumber, String inventoryName,
 			String inventoryAddress, String inventoryPhonenumber, String customerName, String customerAddress,
-			String customerPhonenumber, HashMap<String, String> products) {
+			String customerPhonenumber, HashMap<String, String> products, String status, long otp) {
 		super();
 		this.supplierName = supplierName;
 		this.supplierAddress = supplierAddress;
@@ -52,7 +55,10 @@ public class Gatepass {
 		this.customerAddress = customerAddress;
 		this.customerPhonenumber = customerPhonenumber;
 		this.products = products;
+		this.status = status;
+		this.otp = otp;
 	}
+
 
 	public String get_id() {
 		return _id.toHexString();
@@ -142,19 +148,35 @@ public class Gatepass {
 		this.products = products;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public long getOtp() {
+		return otp;
+	}
+
+	public void setOtp(long otp) {
+		this.otp = otp;
+	}
+
 	@Override
 	public String toString() {
 		return "Gatepass [supplierName=" + supplierName + ", supplierAddress=" + supplierAddress
 				+ ", supplierPhonenumber=" + supplierPhonenumber + ", inventoryName=" + inventoryName
 				+ ", inventoryAddress=" + inventoryAddress + ", inventoryPhonenumber=" + inventoryPhonenumber
 				+ ", customerName=" + customerName + ", customerAddress=" + customerAddress + ", customerPhonenumber="
-				+ customerPhonenumber + ", products=" + products + "]";
+				+ customerPhonenumber + ", products=" + products + ", status=" + status + "]";
 	}
 
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }
