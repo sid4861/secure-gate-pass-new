@@ -1,5 +1,7 @@
 package com.supplier.inventory.securegatepass.securegatepassnew;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.supplier.inventory.securegatepass.securegatepassnew.models.Gatepass;
 import com.supplier.inventory.securegatepass.securegatepassnew.repositories.GatepassRepository;
+import com.supplier.inventory.securegatepass.securegatepassnew.sms.OtpGeneration;
 
 @RestController
 @RequestMapping("/secure-gate-pass/supplier")
@@ -21,16 +24,34 @@ public class GatepassController {
 	@Autowired
 	private GatepassRepository repository;
 	
-	@PostMapping("/generate-gatepass")
-	public Gatepass saveGatepass(@Valid @RequestBody Gatepass gatePass) {
 
+	
+	@PostMapping("/generate-gatepass")
+	public Gatepass saveGatepass(@Valid @RequestBody Gatepass gatePass) throws NoSuchAlgorithmException, NoSuchProviderException {
+
+		gatePass.setGatepassCreationTime(LocalDateTime.now());
 		gatePass.set_id(ObjectId.get());
-		repository.save(gatePass);
 		
+		w:
+		while(true) {
+			Long otp = OtpGeneration.generateOtp();
+			Gatepass g = repository.findByOtpQuery(otp);
+		if(g==null) {
+		gatePass.setOtp(otp);
+		repository.save(gatePass);
+		return gatePass;
+		}
+		
+		else
+			continue w;
+		
+		}
 		/*
 		 code to send OTP to customer's phone number
 		 */
-		return gatePass;
+		
+			
+		
 	}
 	
 	@PostMapping("/generate-gatepass/hardcoded")

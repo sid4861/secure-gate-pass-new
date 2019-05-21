@@ -6,5 +6,6 @@ import com.supplier.inventory.securegatepass.securegatepassnew.models.Gatepass;
 
 public interface GatepassRepository extends MongoRepository<Gatepass, String> {
 
-	
+	@Query("{otp : ?0}")
+	 public Gatepass findByOtpQuery(long otp);
 }
