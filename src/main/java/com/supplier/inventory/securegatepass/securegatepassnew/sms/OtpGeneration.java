@@ -8,9 +8,9 @@ public class OtpGeneration {
 
 	public static long generateOtp() throws NoSuchAlgorithmException, NoSuchProviderException {
 		long otp = 0L;
-		
+
 		SecureRandom secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG", "SUN");
-		
+
 		otp = secureRandomGenerator.nextInt(999999);
 		return otp;
 	}

@@ -35,7 +35,7 @@ public class Gatepass {
 
 	private LocalDateTime gatepassCreationTime;
 	private LocalDateTime gatepassUpdationTime;
-	
+
 	private HashMap<String, String> products;
 	private String status;
 	private long otp;
@@ -228,7 +228,7 @@ public class Gatepass {
 				+ gatepassUpdationTime + ", products=" + products + ", status=" + status + ", otp=" + otp + "]";
 	}
 
-	
+
 
 
 
