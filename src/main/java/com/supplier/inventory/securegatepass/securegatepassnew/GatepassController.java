@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.supplier.inventory.securegatepass.securegatepassnew.models.Gatepass;
 import com.supplier.inventory.securegatepass.securegatepassnew.repositories.GatepassRepository;
 import com.supplier.inventory.securegatepass.securegatepassnew.sms.OtpGeneration;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 @RestController
 @RequestMapping("/secure-gate-pass/supplier")
@@ -37,7 +39,15 @@ public class GatepassController {
 					gatePass.setOtp(otp);
 					gatePass.setGatepassCreationTime(LocalDateTime.now());
 					gatePass.set_id(ObjectId.get());
+					gatePass.setStatus("active");
 					repository.save(gatePass);
+					Message message = Message
+							.creator(new PhoneNumber("+91"+gatePass.getCustomerPhonenumber()), // to
+									new PhoneNumber("+12622610149"), // from
+									"Supplier:"+gatePass.getSupplierName()+"\n"+"OTP:"+Long.toString(gatePass.getOtp())+"products:"+gatePass.getProducts().toString())
+							.create();
+
+					System.out.println(message.getSid());
 					return gatePass;
 				}
 
@@ -59,7 +69,7 @@ public class GatepassController {
 		gatepass.set_id(ObjectId.get());
 		repository.save(gatepass);
 
-	
+
 		return gatepass;
 	}
 }
