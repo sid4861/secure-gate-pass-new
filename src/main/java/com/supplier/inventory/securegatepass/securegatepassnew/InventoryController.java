@@ -1,5 +1,7 @@
 package com.supplier.inventory.securegatepass.securegatepassnew;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,38 +26,43 @@ public class InventoryController {
 		Gatepass g = repository.findByOtpQuery(otp);
 		System.out.println(g);
 
-		if(g.getStatus().equals("active")) {
-			
-			//gatepassPresent(g, otp);
-			g.setStatus("validated");
-			repository.save(g);
-			Message message = Message
-					.creator(new PhoneNumber("+91"+g.getCustomerPhonenumber()), // to
-							new PhoneNumber("+12622610149"), // from
-							"OTP : "+Long.toString(otp)+" : is validated")
-					.create();
-			System.out.println(message.getSid());
-			return String.format("otp is validated"+"\n"+"Supplier name : "+g.getSupplierName()+"\nCustomer name : "+g.getCustomerName()+"\nProducts : "+g.getProducts().toString());
+		if(g!=null) {
 
-				
+			if(g.getStatus().equals("active")) {
+
+				//gatepassPresent(g, otp);
+				g.setStatus("validated");
+				g.setGatepassUpdationTime(LocalDateTime.now());
+				repository.save(g);
+				Message message = Message
+						.creator(new PhoneNumber("+91"+g.getCustomerPhonenumber()), // to
+								new PhoneNumber("+12622610149"), // from
+								"OTP : "+Long.toString(otp)+" : is validated")
+						.create();
+				System.out.println(message.getSid());
+				return String.format("otp is validated"+"\n"+"Supplier name : "+g.getSupplierName()+"\nCustomer name : "+g.getCustomerName()+"\nProducts : "+g.getProducts().toString());
+
+
+			}
+
+			else if (g.getStatus().equals("validated")) {
+
+				//gatepassAbsent();
+				return "OTP is already validated";
+
+
+			}
 		}
 
-		else if (g.getStatus().equals("validated")) {
 
-			//gatepassAbsent();
-			return "OTP is already validated";
-			
-			
-		}
-		
-		else {
-			return "OTP has expired or does not exist";
-		}
+		//else {
+		return "OTP has expired or does not exist";
+		//}
 	}
-	
-/*
+
+	/*
 	private String gatepassPresent(Gatepass g, long otp) {
-		
+
 		g.setStatus("validated");
 		Message message = Message
 				.creator(new PhoneNumber("+91"+g.getCustomerPhonenumber()), // to
@@ -65,12 +72,12 @@ public class InventoryController {
 		System.out.println(message.getSid());
 		return String.format("otp is validated"+"\n"+"Supplier name : "+g.getSupplierName()+"\nCustomer name : "+g.getCustomerName()+"\nProducts : "+g.getProducts().toString());
 
-	
+
 	}
-	
+
 	private String gatepassAbsent() {
-		
+
 		return "OTP has expired or does not exist";
 	}
-	*/
+	 */
 }

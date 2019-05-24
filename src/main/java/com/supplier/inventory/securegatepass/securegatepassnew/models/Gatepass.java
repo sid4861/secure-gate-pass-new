@@ -24,6 +24,7 @@ public class Gatepass {
 	private String supplierName;
 	private String supplierAddress;
 	private String supplierPhonenumber;
+	private String supplierEmail;
 
 	private String inventoryName;
 	private String inventoryAddress;
@@ -39,6 +40,10 @@ public class Gatepass {
 	private HashMap<String, String> products;
 	private String status;
 	private long otp;
+	private long supplierAuthCode;
+
+
+
 
 
 	public Gatepass() {
@@ -46,10 +51,10 @@ public class Gatepass {
 	}
 
 
-	public Gatepass(String supplierName, String supplierAddress, String supplierPhonenumber, String inventoryName,
+	public Gatepass(String supplierName, String supplierAddress, String supplierPhonenumber,String supplierEmail, String inventoryName,
 			String inventoryAddress, String inventoryPhonenumber, String customerName, String customerAddress,
 			String customerPhonenumber, LocalDateTime gatepassCreationTime, LocalDateTime gatepassUpdationTime,
-			HashMap<String, String> products, String status, long otp) {
+			HashMap<String, String> products, String status, long otp, long supplierAuthCode ) {
 		super();
 		this.supplierName = supplierName;
 		this.supplierAddress = supplierAddress;
@@ -65,6 +70,8 @@ public class Gatepass {
 		this.products = products;
 		this.status = status;
 		this.otp = otp;
+		this.supplierAuthCode = supplierAuthCode;
+		this.supplierEmail = supplierEmail;
 	}
 
 
@@ -108,6 +115,15 @@ public class Gatepass {
 	}
 
 
+	public String getSupplierEmail() {
+		return supplierEmail;
+	}
+
+
+	public void setSupplierEmail(String supplierEmail) {
+		this.supplierEmail = supplierEmail;
+	}
+	
 	public String getInventoryName() {
 		return inventoryName;
 	}
@@ -217,16 +233,28 @@ public class Gatepass {
 		this.otp = otp;
 	}
 
+	public long getSupplierAuthCode() {
+		return supplierAuthCode;
+	}
+
+
+	public void setSupplierAuthCode(long supplierAuthCode) {
+		this.supplierAuthCode = supplierAuthCode;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Gatepass [supplierName=" + supplierName + ", supplierAddress=" + supplierAddress
-				+ ", supplierPhonenumber=" + supplierPhonenumber + ", inventoryName=" + inventoryName
-				+ ", inventoryAddress=" + inventoryAddress + ", inventoryPhonenumber=" + inventoryPhonenumber
-				+ ", customerName=" + customerName + ", customerAddress=" + customerAddress + ", customerPhonenumber="
-				+ customerPhonenumber + ", gatepassCreationTime=" + gatepassCreationTime + ", gatepassUpdationTime="
-				+ gatepassUpdationTime + ", products=" + products + ", status=" + status + ", otp=" + otp + "]";
+				+ ", supplierPhonenumber=" + supplierPhonenumber + ", supplierEmail=" + supplierEmail
+				+ ", inventoryName=" + inventoryName + ", inventoryAddress=" + inventoryAddress
+				+ ", inventoryPhonenumber=" + inventoryPhonenumber + ", customerName=" + customerName
+				+ ", customerAddress=" + customerAddress + ", customerPhonenumber=" + customerPhonenumber
+				+ ", gatepassCreationTime=" + gatepassCreationTime + ", gatepassUpdationTime=" + gatepassUpdationTime
+				+ ", products=" + products + ", status=" + status + ", otp=" + otp + ", supplierAuthCode="
+				+ supplierAuthCode + "]";
 	}
+
 
 
 

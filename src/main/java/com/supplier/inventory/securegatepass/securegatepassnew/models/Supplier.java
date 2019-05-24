@@ -1,70 +1,105 @@
 package com.supplier.inventory.securegatepass.securegatepassnew.models;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+
 public class Supplier {
 
-	private String supplirId;
-	private String firmName;
-	private long phoneNumber;
-	private String address;
-	private String email;
-	private String password;
+	@Id
+	private ObjectId _id;
+
+	private String supplierName;
+	private String supplierAddress;
+	private String supplierPhonenumber;
+	private String supplierEmail;
+	private long supplierAuthCode;
+
 
 	public Supplier() {
 		super();
 	}
-	public Supplier(String supplirId, String firmName, long phoneNumber, String address, String email,
-			String password) {
+
+
+
+	public Supplier(String supplierName, String supplierAddress, String supplierPhonenumber, String supplierEmail,
+			long supplierAuthCode) {
 		super();
-		this.supplirId = supplirId;
-		this.firmName = firmName;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.email = email;
-		this.password = password;
+		this.supplierName = supplierName;
+		this.supplierAddress = supplierAddress;
+		this.supplierPhonenumber = supplierPhonenumber;
+		this.supplierEmail = supplierEmail;
+		this.supplierAuthCode = supplierAuthCode;
 	}
-	public String getSupplirId() {
-		return supplirId;
+
+
+
+	public String get_id() {
+		return _id.toHexString();
 	}
-	public void setSupplirId(String supplirId) {
-		this.supplirId = supplirId;
+
+
+	public void set_id(ObjectId _id) {
+		this._id = _id;
 	}
-	public String getFirmName() {
-		return firmName;
+
+
+	public String getSupplierName() {
+		return supplierName;
 	}
-	public void setFirmName(String firmName) {
-		this.firmName = firmName;
+
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
 	}
-	public long getPhoneNumber() {
-		return phoneNumber;
+
+
+	public String getSupplierAddress() {
+		return supplierAddress;
 	}
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
+
+
+	public void setSupplierAddress(String supplierAddress) {
+		this.supplierAddress = supplierAddress;
 	}
-	public String getAddress() {
-		return address;
+
+
+	public String getSupplierPhonenumber() {
+		return supplierPhonenumber;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+
+
+	public void setSupplierPhonenumber(String supplierPhonenumber) {
+		this.supplierPhonenumber = supplierPhonenumber;
 	}
-	public String getEmail() {
-		return email;
+
+
+	public String getSupplierEmail() {
+		return supplierEmail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+
+	public void setSupplierEmail(String supplierEmail) {
+		this.supplierEmail = supplierEmail;
 	}
-	public String getPassword() {
-		return password;
+
+
+	public long getSupplierAuthCode() {
+		return supplierAuthCode;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+
+	public void setSupplierAuthCode(long supplierAuthCode) {
+		this.supplierAuthCode = supplierAuthCode;
 	}
+
+
+
 	@Override
 	public String toString() {
-		return "Supplier [supplirId=" + supplirId + ", firmName=" + firmName + ", phoneNumber=" + phoneNumber
-				+ ", address=" + address + ", email=" + email + ", password=" + password + "]";
+		return "Supplier [supplierName=" + supplierName + ", supplierAddress=" + supplierAddress
+				+ ", supplierPhonenumber=" + supplierPhonenumber + ", supplierEmail=" + supplierEmail
+				+ ", supplierAuthCode=" + supplierAuthCode + "]";
 	}
-
-
 
 
 
