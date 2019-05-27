@@ -10,6 +10,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import com.supplier.inventory.securegatepass.securegatepassnew.sms.OtpGeneration
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/secure-gate-pass/supplier")
 public class GatepassController {

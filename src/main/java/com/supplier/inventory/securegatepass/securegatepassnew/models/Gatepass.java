@@ -37,7 +37,7 @@ public class Gatepass {
 	private LocalDateTime gatepassCreationTime;
 	private LocalDateTime gatepassUpdationTime;
 
-	private HashMap<String, String> products;
+	private String products;
 	private String status;
 	private long otp;
 	private long supplierAuthCode;
@@ -54,7 +54,7 @@ public class Gatepass {
 	public Gatepass(String supplierName, String supplierAddress, String supplierPhonenumber,String supplierEmail, String inventoryName,
 			String inventoryAddress, String inventoryPhonenumber, String customerName, String customerAddress,
 			String customerPhonenumber, LocalDateTime gatepassCreationTime, LocalDateTime gatepassUpdationTime,
-			HashMap<String, String> products, String status, long otp, long supplierAuthCode ) {
+			String products, String status, long otp, long supplierAuthCode ) {
 		super();
 		this.supplierName = supplierName;
 		this.supplierAddress = supplierAddress;
@@ -204,12 +204,12 @@ public class Gatepass {
 	}
 
 
-	public HashMap<String, String> getProducts() {
+	public String getProducts() {
 		return products;
 	}
 
 
-	public void setProducts(HashMap<String, String> products) {
+	public void setProducts(String products) {
 		this.products = products;
 	}
 

@@ -3,6 +3,7 @@ package com.supplier.inventory.securegatepass.securegatepassnew;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import com.supplier.inventory.securegatepass.securegatepassnew.repositories.Gate
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/secure-gate-pass/inventory")
 public class InventoryController {
