@@ -3,15 +3,20 @@ package com.supplier.inventory.securegatepass.securegatepassnew;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.supplier.inventory.securegatepass.securegatepassnew.models.Gatepass;
@@ -49,14 +54,34 @@ public class SupplierController {
 					.create();
 
 			System.out.println(message.getSid());
-			*/
+			 */
 			return supplier;
 		}
 
 		else
 			return "This email id/ phone number already exists";
 
+	}
 
+	@GetMapping("/forgot-authcode")
 
+	public String retrieveAuthCode(@RequestParam Map<String,String> allParams) {
+
+		Supplier supplier = repository.findByEmailAndPhoneNumber(allParams.get("Email"), allParams.get("PhoneNumber"));
+		if(supplier != null) {
+			/*Message message = Message
+					.creator(new PhoneNumber("+91"+supplier.getSupplierPhonenumber()), // to
+							new PhoneNumber("+12622610149"), // from
+							"You are registered as a supplier. \n Supplier auth code : "+Long.toString(supplier.getSupplierAuthCode()))
+					.create();
+
+			System.out.println(message.getSid());*/
+			return("auth code sent over sms : " +Long.toString(supplier.getSupplierAuthCode()));
+
+		}
+
+		else {
+			return "No supplier registered with this email and mobile number";
+		}
 	}
 }

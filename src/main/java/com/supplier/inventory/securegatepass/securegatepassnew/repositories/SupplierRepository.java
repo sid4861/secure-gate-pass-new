@@ -11,5 +11,8 @@ public interface SupplierRepository extends MongoRepository<Supplier, String> {
 
 	@Query("{supplierAuthCode : ?0}")
 	public Supplier findByAuthCode(long supplierAuthCode);
+	
+	@Query("{supplierPhonenumber : ?0}")
+	public Supplier findByPhoneNumber(String supplierPhonenumber);
 
 }
