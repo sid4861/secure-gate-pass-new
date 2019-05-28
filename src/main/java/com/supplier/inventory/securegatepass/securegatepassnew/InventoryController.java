@@ -1,6 +1,6 @@
 package com.supplier.inventory.securegatepass.securegatepassnew;
 
-import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.supplier.inventory.securegatepass.securegatepassnew.models.Gatepass;
 import com.supplier.inventory.securegatepass.securegatepassnew.repositories.GatepassRepository;
 import com.twilio.rest.api.v2010.account.Message;
@@ -20,66 +19,51 @@ import com.twilio.type.PhoneNumber;
 public class InventoryController {
 
 	@Autowired
-	private GatepassRepository repository;
+	private GatepassRepository gatepassRepository;
+
 
 	@GetMapping("/validate-gatepass")
-	public String validateGatepass(@RequestParam(value="otp") long otp) {
 
-		Gatepass g = repository.findByOtpQuery(otp);
-		System.out.println(g);
+	public String validateGatepass(@RequestParam Map<String,String> allParams) {
 
-		if(g!=null) {
+		String Response;
 
-			if(g.getStatus().equals("active")) {
+		Gatepass gatepass = gatepassRepository.findByOtpQuery(Long.valueOf(allParams.get("otp")));
+		System.out.println(gatepass.getStatus());
+		if(gatepass.getStatus().equals("active")) {
+			/*Message message = Message
+					.creator(new PhoneNumber("+91"+gatepass.getCustomerPhonenumber()), // to
+							new PhoneNumber("+12622610149"), // from
+							"OTP : "+Long.toString(gatepass.getOtp())+" is validated")
+					.create();
 
-				//gatepassPresent(g, otp);
-				g.setStatus("validated");
-				g.setGatepassUpdationTime(LocalDateTime.now());
-				repository.save(g);
-				Message message = Message
-						.creator(new PhoneNumber("+91"+g.getCustomerPhonenumber()), // to
-								new PhoneNumber("+12622610149"), // from
-								"OTP : "+Long.toString(otp)+" : is validated")
-						.create();
-				System.out.println(message.getSid());
-				return String.format("otp is validated"+"\n"+"Supplier name : "+g.getSupplierName()+"\nCustomer name : "+g.getCustomerName()+"\nProducts : "+g.getProducts().toString());
+			
+			System.out.println(message.getSid());
+			
+			Message message2 = Message
+					.creator(new PhoneNumber("+91"+gatepass.getSupplierPhonenumber()), // to
+							new PhoneNumber("+12622610149"), // from
+							"OTP : "+Long.toString(gatepass.getOtp())+" is validated")
+					.create();
 
+			
+			System.out.println(message2.getSid());*/
+			gatepass.setStatus("validated");
+			gatepassRepository.save(gatepass);
+			Response = String.format("Supplier : %s\nCustomer : %s \n Products : %s", gatepass.getSupplierName(), gatepass.getCustomerName(), gatepass.getProducts());
+			return Response;
 
-			}
-
-			else if (g.getStatus().equals("validated")) {
-
-				//gatepassAbsent();
-				return "OTP is already validated";
-
-
-			}
 		}
 
+		else if(gatepass.getStatus().equals("validated")) {
+			Response = "This OTP is already validated";
+			return Response;
+		}
 
-		//else {
-		return "OTP has expired or does not exist";
-		//}
+		else {
+			Response = "OTP is either invalid or has expired";
+			return Response;
+		}
 	}
-
-	/*
-	private String gatepassPresent(Gatepass g, long otp) {
-
-		g.setStatus("validated");
-		Message message = Message
-				.creator(new PhoneNumber("+91"+g.getCustomerPhonenumber()), // to
-						new PhoneNumber("+12622610149"), // from
-						Long.toString(otp)+" : is validated")
-				.create();
-		System.out.println(message.getSid());
-		return String.format("otp is validated"+"\n"+"Supplier name : "+g.getSupplierName()+"\nCustomer name : "+g.getCustomerName()+"\nProducts : "+g.getProducts().toString());
-
-
-	}
-
-	private String gatepassAbsent() {
-
-		return "OTP has expired or does not exist";
-	}
-	 */
 }
+

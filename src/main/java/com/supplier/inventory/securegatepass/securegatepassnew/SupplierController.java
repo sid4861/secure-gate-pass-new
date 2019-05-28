@@ -65,9 +65,9 @@ public class SupplierController {
 
 	@GetMapping("/forgot-authcode")
 
-	public String retrieveAuthCode(@RequestParam Map<String,String> allParams) {
+	public void retrieveAuthCode(@RequestParam Map<String,String> allParams) {
 
-		Supplier supplier = repository.findByEmailAndPhoneNumber(allParams.get("Email"), allParams.get("PhoneNumber"));
+		Supplier supplier = repository.findByPhoneNumber(allParams.get("PhoneNumber"));
 		if(supplier != null) {
 			/*Message message = Message
 					.creator(new PhoneNumber("+91"+supplier.getSupplierPhonenumber()), // to
@@ -76,12 +76,12 @@ public class SupplierController {
 					.create();
 
 			System.out.println(message.getSid());*/
-			return("auth code sent over sms : " +Long.toString(supplier.getSupplierAuthCode()));
+			System.out.println("auth code sent over sms : " +Long.toString(supplier.getSupplierAuthCode()));
 
 		}
 
 		else {
-			return "No supplier registered with this email and mobile number";
+			System.out.println("No supplier registered with this email and mobile number");
 		}
 	}
 }
