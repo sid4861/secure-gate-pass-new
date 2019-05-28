@@ -58,13 +58,13 @@ public class GatepassController {
 						gatePass.setSupplierEmail(supplier.getSupplierEmail());
 						gatePass.setSupplierAuthCode(supplier.getSupplierAuthCode());
 						gatepassRepository.save(gatePass);
-						/*Message message = Message
+						Message message = Message
 								.creator(new PhoneNumber("+91"+gatePass.getCustomerPhonenumber()), // to
 										new PhoneNumber("+12622610149"), // from
 										"\nSupplier : "+gatePass.getSupplierName()+"\n"+"OTP:"+Long.toString(gatePass.getOtp())+"Godown name : "+gatePass.getInventoryName()+"products:"+gatePass.getProducts().toString())
 								.create();
 
-						System.out.println(message.getSid());*/
+						System.out.println(message.getSid());
 						return gatePass;
 					}
 

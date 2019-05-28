@@ -31,7 +31,7 @@ public class InventoryController {
 		Gatepass gatepass = gatepassRepository.findByOtpQuery(Long.valueOf(allParams.get("otp")));
 		System.out.println(gatepass.getStatus());
 		if(gatepass.getStatus().equals("active")) {
-			/*Message message = Message
+			Message message = Message
 					.creator(new PhoneNumber("+91"+gatepass.getCustomerPhonenumber()), // to
 							new PhoneNumber("+12622610149"), // from
 							"OTP : "+Long.toString(gatepass.getOtp())+" is validated")
@@ -47,7 +47,7 @@ public class InventoryController {
 					.create();
 
 			
-			System.out.println(message2.getSid());*/
+			System.out.println(message2.getSid());
 			gatepass.setStatus("validated");
 			gatepassRepository.save(gatepass);
 			Response = String.format("Supplier : %s\nCustomer : %s \n Products : %s", gatepass.getSupplierName(), gatepass.getCustomerName(), gatepass.getProducts());

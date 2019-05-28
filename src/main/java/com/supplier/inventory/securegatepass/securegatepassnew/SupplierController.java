@@ -69,13 +69,13 @@ public class SupplierController {
 
 		Supplier supplier = repository.findByPhoneNumber(allParams.get("PhoneNumber"));
 		if(supplier != null) {
-			/*Message message = Message
+			Message message = Message
 					.creator(new PhoneNumber("+91"+supplier.getSupplierPhonenumber()), // to
 							new PhoneNumber("+12622610149"), // from
 							"You are registered as a supplier. \n Supplier auth code : "+Long.toString(supplier.getSupplierAuthCode()))
 					.create();
 
-			System.out.println(message.getSid());*/
+			System.out.println(message.getSid());
 			System.out.println("auth code sent over sms : " +Long.toString(supplier.getSupplierAuthCode()));
 
 		}
