@@ -47,14 +47,14 @@ public class SupplierController {
 			supplier.setSupplierAuthCode(otp);
 			supplier.set_id(ObjectId.get());
 			repository.save(supplier);
-			/*Message message = Message
+			Message message = Message
 					.creator(new PhoneNumber("+91"+supplier.getSupplierPhonenumber()), // to
 							new PhoneNumber("+12622610149"), // from
 							"You are registered as a supplier. \n Supplier auth code : "+Long.toString(supplier.getSupplierAuthCode()))
 					.create();
 
 			System.out.println(message.getSid());
-			 */
+			 
 			return supplier;
 		}
 
